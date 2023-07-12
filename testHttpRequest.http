@@ -11,7 +11,7 @@ Accept: application/json
 
 ###
 
-GET /api/stationaryItem/10
+GET /api/stationaryItem/1
 Host: localhost:8080
 Accept: application/json
 
@@ -23,19 +23,19 @@ Accept: application/json
 
 ###
 
-PATCH  /api/stationaryItem/10
+PATCH  /api/stationaryItem/2
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
 
 
 {
-
+    "quantity":45
 }
 
 ###
 
-DELETE /api/stationaryItem/3
+DELETE /api/stationaryItem/1
 Host: localhost:8080
 Accept: application/json
 

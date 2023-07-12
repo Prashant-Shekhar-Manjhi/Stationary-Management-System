@@ -1,4 +1,4 @@
-package com.targetindia.stationarymanagementsystem.model;
+package com.targetindia.stationarymanagementsystem.controllers.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
