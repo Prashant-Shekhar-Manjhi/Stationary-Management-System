@@ -1,0 +1,43 @@
+POST /api/stationaryItem/save
+Host: localhost:8080
+Content-Type: application/json
+Accept: application/json
+
+{
+    "itemName":"pen",
+    "quantity":"25",
+    "returnable":"true"
+}
+
+###
+
+GET /api/stationaryItem/10
+Host: localhost:8080
+Accept: application/json
+
+###
+
+GET /api/stationaryItem
+Host: localhost:8080
+Accept: application/json
+
+###
+
+PATCH  /api/stationaryItem/10
+Host: localhost:8080
+Content-Type: application/json
+Accept: application/json
+
+
+{
+
+}
+
+###
+
+DELETE /api/stationaryItem/3
+Host: localhost:8080
+Accept: application/json
+
+
+###
