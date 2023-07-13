@@ -7,7 +7,6 @@ import com.targetindia.stationarymanagementsystem.model.LoginResponse;
 import com.targetindia.stationarymanagementsystem.model.Message;
 import com.targetindia.stationarymanagementsystem.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,7 +54,7 @@ public class AdminController {
                 return ResponseEntity.ok(new LoginResponse("Login Successful", true ,adminResponseDto));
             }
         }catch (Exception e){
-            return ResponseEntity.status(401).body(new LoginResponse("Incorrect email and password", false));
+            return ResponseEntity.status(401).body(new LoginResponse("Incorrect email or password", false));
         }
     }
 
