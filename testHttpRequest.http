@@ -4,14 +4,15 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "itemName":"pen",
-    "quantity":"25",
-    "returnable":"true"
+
+    "itemName": "pencil",
+    "quantity": 25,
+    "returnable": true
 }
 
 ###
 
-GET /api/stationaryItem/1
+GET /api/stationaryItem/4
 Host: localhost:8080
 Accept: application/json
 
@@ -23,21 +24,48 @@ Accept: application/json
 
 ###
 
-PATCH  /api/stationaryItem/2
+PATCH  /api/stationaryItem/4
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
 
 
 {
-    "quantity":45
+    "returnable":"true"
 }
 
 ###
 
-DELETE /api/stationaryItem/1
+DELETE /api/stationaryItem/4
 Host: localhost:8080
 Accept: application/json
 
+
+###
+
+POST /api/admin/register
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "adminName":"admin5",
+    "adminEmail":"admin5@xmple.com",
+    "adminPassword":"123456"
+}
+
+###
+GET /api/admin
+Host: localhost:8080
+Accept: application/json
+
+###
+POST /api/admin/login
+Host: localhost:8080
+Content-Type: application/json
+
+{ 
+    "adminEmail": "admin5@xmple.com",
+    "adminPassword":"123456"
+}
 
 ###

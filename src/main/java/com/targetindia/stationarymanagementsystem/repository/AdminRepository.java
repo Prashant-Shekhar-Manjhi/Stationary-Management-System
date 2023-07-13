@@ -3,5 +3,9 @@ package com.targetindia.stationarymanagementsystem.repository;
 import com.targetindia.stationarymanagementsystem.entities.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
+    public Admin findByAdminEmail(String email);
+    Optional<Admin> findOneByAdminEmailAndAdminPassword(String email, String password);
 }

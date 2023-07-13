@@ -1,7 +1,10 @@
 package com.targetindia.stationarymanagementsystem.controllers;
 
+import com.targetindia.stationarymanagementsystem.dto.AdminLoginDto;
+import com.targetindia.stationarymanagementsystem.dto.AdminResponseDto;
 import com.targetindia.stationarymanagementsystem.entities.Admin;
-import com.targetindia.stationarymanagementsystem.controllers.model.Message;
+import com.targetindia.stationarymanagementsystem.model.LoginResponse;
+import com.targetindia.stationarymanagementsystem.model.Message;
 import com.targetindia.stationarymanagementsystem.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,9 +33,30 @@ public class AdminController {
 
     @GetMapping(produces = "application/json")
     public ResponseEntity handleGetAllAdmins(){
-        List<Admin> result = adminService.getAllAdmin();
+        try {
+            List<Admin> result = adminService.getAllAdmin();
+            return ResponseEntity.ok(result);
+        }catch (Exception e){
+            return ResponseEntity.status(404).body("List of Admins not Found!");
+        }
+    }
 
-        return ResponseEntity.ok(result);
+    @PostMapping(path = "/login", produces = "application/json", consumes = "application/json")
+    public ResponseEntity handleAdminLogin(@RequestBody AdminLoginDto loginDto){
+        try{
+            Admin admin = adminService.adminLogin(loginDto);
+            if(admin == null) return  ResponseEntity.status(HttpStatus.FORBIDDEN).body(new Message("Incorrect email and password"));
+            else {
+                AdminResponseDto  adminResponseDto = new AdminResponseDto(
+                        admin.getAdminId(),
+                        admin.getAdminName(),
+                        admin.getAdminEmail()
+                );
+                return ResponseEntity.ok(new LoginResponse("Login Successful", true ,adminResponseDto));
+            }
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(new LoginResponse(e.getLocalizedMessage(), false));
+        }
     }
 
 }
