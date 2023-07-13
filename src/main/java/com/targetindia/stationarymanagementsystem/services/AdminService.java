@@ -50,9 +50,9 @@ public class AdminService {
                         return fetchedAdminByEmailAndPassword.get();
                     else return  null;
                 }
-                throw new RuntimeException("Incorrect Password");
+                throw new Exception("Incorrect Password");
             }
-            else throw new RuntimeException("Incorrect Email");
+            else throw new Exception("Incorrect Email");
         }catch (Exception e){
             throw new RuntimeException(e);
         }

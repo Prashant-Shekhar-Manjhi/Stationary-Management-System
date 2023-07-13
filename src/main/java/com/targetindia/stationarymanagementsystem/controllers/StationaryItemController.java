@@ -58,7 +58,7 @@ public class StationaryItemController {
             StationaryItem item = service.updateItem(stationaryItem);
             return ResponseEntity.ok(item);
         }catch (Exception e){
-            return ResponseEntity.status(404).body(new Message(e.getMessage()));
+            return ResponseEntity.status(404).body(new Message("Item Not Found with id "+id));
         }
     }
 
@@ -68,7 +68,7 @@ public class StationaryItemController {
             StationaryItem fetchedItem = service.deleteOneItem(id);
             return ResponseEntity.ok(fetchedItem);
         }catch (Exception e){
-            return ResponseEntity.status(404).body(new Message(e.getMessage()));
+            return ResponseEntity.status(404).body(new Message("Item Not Found with id "+id));
         }
     }
 }

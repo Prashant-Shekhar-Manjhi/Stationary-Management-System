@@ -26,7 +26,7 @@ public class AdminController {
             adminService.register(admin);
             return ResponseEntity.ok(new Message("Registration Successful"));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new Message("Registration Failed"));
+            return ResponseEntity.status(400).body(new Message("Registration Failed"));
         }
 
     }
@@ -45,7 +45,7 @@ public class AdminController {
     public ResponseEntity handleAdminLogin(@RequestBody AdminLoginDto loginDto){
         try{
             Admin admin = adminService.adminLogin(loginDto);
-            if(admin == null) return  ResponseEntity.status(HttpStatus.FORBIDDEN).body(new Message("Incorrect email and password"));
+            if(admin == null) return  ResponseEntity.status(401).body(new LoginResponse("Incorrect email and password", false));
             else {
                 AdminResponseDto  adminResponseDto = new AdminResponseDto(
                         admin.getAdminId(),
@@ -55,7 +55,7 @@ public class AdminController {
                 return ResponseEntity.ok(new LoginResponse("Login Successful", true ,adminResponseDto));
             }
         }catch (Exception e){
-            return ResponseEntity.status(500).body(new LoginResponse(e.getLocalizedMessage(), false));
+            return ResponseEntity.status(401).body(new LoginResponse("Incorrect email and password", false));
         }
     }
 

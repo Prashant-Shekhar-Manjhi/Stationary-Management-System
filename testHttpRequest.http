@@ -65,7 +65,7 @@ Content-Type: application/json
 
 { 
     "adminEmail": "admin5@xmple.com",
-    "adminPassword":"123456"
+    "adminPassword":"12345"
 }
 
 ###
