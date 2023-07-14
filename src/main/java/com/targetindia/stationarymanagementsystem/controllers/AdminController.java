@@ -1,9 +1,9 @@
 package com.targetindia.stationarymanagementsystem.controllers;
 
-import com.targetindia.stationarymanagementsystem.dto.AdminLoginDto;
-import com.targetindia.stationarymanagementsystem.dto.AdminResponseDto;
+import com.targetindia.stationarymanagementsystem.dto.AdminLoginDTO;
+import com.targetindia.stationarymanagementsystem.dto.AdminDTO;
 import com.targetindia.stationarymanagementsystem.entities.Admin;
-import com.targetindia.stationarymanagementsystem.model.LoginResponse;
+import com.targetindia.stationarymanagementsystem.model.AdminLoginResponse;
 import com.targetindia.stationarymanagementsystem.model.Message;
 import com.targetindia.stationarymanagementsystem.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,20 +41,20 @@ public class AdminController {
     }
 
     @PostMapping(path = "/login", produces = "application/json", consumes = "application/json")
-    public ResponseEntity handleAdminLogin(@RequestBody AdminLoginDto loginDto){
+    public ResponseEntity handleAdminLogin(@RequestBody AdminLoginDTO loginDto){
         try{
             Admin admin = adminService.adminLogin(loginDto);
-            if(admin == null) return  ResponseEntity.status(401).body(new LoginResponse("Incorrect email and password", false));
+            if(admin == null) return  ResponseEntity.status(401).body(new AdminLoginResponse("Incorrect email and password", false));
             else {
-                AdminResponseDto  adminResponseDto = new AdminResponseDto(
+                AdminDTO adminResponseDto = new AdminDTO(
                         admin.getAdminId(),
                         admin.getAdminName(),
                         admin.getAdminEmail()
                 );
-                return ResponseEntity.ok(new LoginResponse("Login Successful", true ,adminResponseDto));
+                return ResponseEntity.ok(new AdminLoginResponse("Login Successful", true ,adminResponseDto));
             }
         }catch (Exception e){
-            return ResponseEntity.status(401).body(new LoginResponse("Incorrect email or password", false));
+            return ResponseEntity.status(401).body(new AdminLoginResponse("Incorrect email or password", false));
         }
     }
 

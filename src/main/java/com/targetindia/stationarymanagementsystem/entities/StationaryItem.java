@@ -24,7 +24,7 @@ public class StationaryItem {
     @Column(name = "returnable")
     private Boolean returnable;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id")
     private List<Transaction> transactions;
 }

@@ -5,7 +5,7 @@ Accept: application/json
 
 {
 
-    "itemName": "pencil",
+    "itemName": "pen",
     "quantity": 25,
     "returnable": true
 }
@@ -24,7 +24,7 @@ Accept: application/json
 
 ###
 
-PATCH  /api/stationaryItem/4
+PATCH  /api/stationaryItem/2
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
@@ -36,7 +36,7 @@ Accept: application/json
 
 ###
 
-DELETE /api/stationaryItem/4
+DELETE /api/stationaryItem/2
 Host: localhost:8080
 Accept: application/json
 
@@ -64,8 +64,37 @@ Host: localhost:8080
 Content-Type: application/json
 
 { 
-    "adminEmail": "admin5@xmple.com",
-    "adminPassword":"12345"
+    "adminEmail": "admin6@xmple.com",
+    "adminPassword":"123456"
 }
+
+###
+
+POST /api/student/register
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "studentName":"student8",
+    "studentEmail":"student8@xmple.com",
+    "studentPassword":"123456"
+}
+
+###
+
+POST /api/student/login
+Host: localhost:8080
+Content-Type: application/json
+
+{
+   "studentEmail":"student8@xmple.com",
+    "studentPassword":"123456"
+}
+
+###
+
+GET /api/student
+Host: localhost:8080
+Accept: application/json
 
 ###

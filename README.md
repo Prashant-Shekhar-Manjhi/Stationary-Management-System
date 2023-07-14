@@ -9,6 +9,9 @@
     6. update Item -     http://[hostname:port]/api/stationaryItem/[id]    (Method - PATCH)
     7. delete Item  -    http://[hostname:port]/api/stationaryItem/[id]    (Method - DELETE)
 
+    8. student signup -   http://[hostname:port]/api/student/register        (Method - POST)
+    9. student login -   http://[hostname:port]/api/student/login           (Method - POST)
+
 
 
 ![](./ER_DIAGRAM.png)

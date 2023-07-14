@@ -1,6 +1,6 @@
 package com.targetindia.stationarymanagementsystem.services;
 
-import com.targetindia.stationarymanagementsystem.dto.AdminLoginDto;
+import com.targetindia.stationarymanagementsystem.dto.AdminLoginDTO;
 import com.targetindia.stationarymanagementsystem.entities.Admin;
 import com.targetindia.stationarymanagementsystem.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class AdminService {
     }
 
     //Admin Login...
-    public Admin adminLogin(AdminLoginDto loginDto){
+    public Admin adminLogin(AdminLoginDTO loginDto){
         try{
             Admin fetchedAdminByEmail = adminRepository.findByAdminEmail(loginDto.getAdminEmail());
             if(fetchedAdminByEmail != null){
