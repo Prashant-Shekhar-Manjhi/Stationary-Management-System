@@ -4,14 +4,15 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "itemName":"pen",
-    "quantity":"25",
-    "returnable":"true"
+
+    "itemName": "sharpner",
+    "quantity": 100,
+    "returnable": true
 }
 
 ###
 
-GET /api/stationaryItem/1
+GET /api/stationaryItem/3
 Host: localhost:8080
 Accept: application/json
 
@@ -23,21 +24,118 @@ Accept: application/json
 
 ###
 
-PATCH  /api/stationaryItem/2
+PATCH  /api/stationaryItem/3
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
 
 
 {
-    "quantity":45
+   "quantity": 100,
+    "returnable": true
 }
 
 ###
 
-DELETE /api/stationaryItem/1
+DELETE /api/stationaryItem/4
 Host: localhost:8080
 Accept: application/json
 
 
 ###
+
+POST /api/admin/register
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "adminName":"admin8",
+    "adminEmail":"admin8@xmple.com",
+    "adminPassword":"123456"
+}
+
+###
+GET /api/admin
+Host: localhost:8080
+Accept: application/json
+
+###
+POST /api/admin/login
+Host: localhost:8080
+Content-Type: application/json
+
+{ 
+    "adminEmail": "admin5@xmple.com",
+    "adminPassword":"123456"
+}
+
+###
+
+POST /api/student/register
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "studentName":"student2",
+    "studentEmail":"student2@xmple.com",
+    "studentPassword":"123456"
+}
+
+###
+
+
+GET /api/student
+Host: localhost:8080
+Accept: application/json
+
+###
+
+POST /api/student/login
+Host: localhost:8080
+Content-Type: application/json
+
+{
+   "studentEmail":"student1@xmple.com",
+    "studentPassword":"123456"
+}
+
+###
+
+POST /api/transaction/2
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "stationaryItemId":"1",
+    "withdrawnQuantity":35,
+    "returnDate":"2023-07-20",
+    "returned":"false"
+}        
+
+###
+
+
+Get /api/transaction
+Host: localhost:8080
+Content-Type: application/json
+
+###        
+
+Get /api/transaction/2
+Host: localhost:8080
+Content-Type: application/json
+Accept: application/json
+
+###        
+
+PATCH /api/transaction/6
+Host: localhost:8080
+Content-Type: application/json
+Accept: application/json
+
+{
+    "returnDate": "2023-07-24",
+    "returned": false
+}
+
+###      

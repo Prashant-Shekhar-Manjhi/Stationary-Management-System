@@ -1,7 +1,7 @@
 package com.targetindia.stationarymanagementsystem.controllers;
 
 import com.targetindia.stationarymanagementsystem.entities.StationaryItem;
-import com.targetindia.stationarymanagementsystem.controllers.model.Message;
+import com.targetindia.stationarymanagementsystem.model.Message;
 import com.targetindia.stationarymanagementsystem.services.StationaryItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/api/stationaryItem")
 public class StationaryItemController {
 
@@ -25,7 +26,7 @@ public class StationaryItemController {
             }
             return ResponseEntity.ok(stationaryItem);
         }catch (Exception e){
-            return ResponseEntity.status(500).body(new Message(e.getMessage()));
+            return ResponseEntity.status(500).body(new Message("Item Not Saved"));
         }
     }
 
@@ -58,7 +59,7 @@ public class StationaryItemController {
             StationaryItem item = service.updateItem(stationaryItem);
             return ResponseEntity.ok(item);
         }catch (Exception e){
-            return ResponseEntity.status(404).body(new Message(e.getMessage()));
+            return ResponseEntity.status(404).body(new Message("Item Not Found with id "+id));
         }
     }
 
@@ -68,7 +69,7 @@ public class StationaryItemController {
             StationaryItem fetchedItem = service.deleteOneItem(id);
             return ResponseEntity.ok(fetchedItem);
         }catch (Exception e){
-            return ResponseEntity.status(404).body(new Message(e.getMessage()));
+            return ResponseEntity.status(404).body(new Message("Item Not Found with id "+id));
         }
     }
 }

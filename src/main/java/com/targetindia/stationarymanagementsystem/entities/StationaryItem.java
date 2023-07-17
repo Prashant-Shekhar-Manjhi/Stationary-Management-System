@@ -3,6 +3,8 @@ package com.targetindia.stationarymanagementsystem.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "stationary_item")
@@ -21,4 +23,8 @@ public class StationaryItem {
 
     @Column(name = "returnable")
     private Boolean returnable;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "item_id")
+    private List<Transaction> transactions;
 }

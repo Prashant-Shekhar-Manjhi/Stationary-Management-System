@@ -1,7 +1,10 @@
 package com.targetindia.stationarymanagementsystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -15,9 +18,14 @@ public class Student {
     @Column(name = "student_name")
     private String studentName;
 
-    @Column(name = "student_email")
+    @Column(name = "student_email", unique = true)
     private String studentEmail;
 
+    @JsonIgnore
     @Column(name = "student_password")
     private String studentPassword;
+
+    @OneToMany
+    @JoinColumn(name = "student_id")
+    private List<Transaction> transactions;
 }
