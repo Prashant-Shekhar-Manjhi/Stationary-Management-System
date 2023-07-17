@@ -5,7 +5,7 @@ Accept: application/json
 
 {
 
-    "itemName": "notebook",
+    "itemName": "sharpner",
     "quantity": 100,
     "returnable": true
 }
@@ -31,12 +31,13 @@ Accept: application/json
 
 
 {
-    "returnable":"true"
+   "quantity": 100,
+    "returnable": true
 }
 
 ###
 
-DELETE /api/stationaryItem/2
+DELETE /api/stationaryItem/4
 Host: localhost:8080
 Accept: application/json
 
@@ -64,7 +65,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 { 
-    "adminEmail": "admin@xmple.com",
+    "adminEmail": "admin5@xmple.com",
     "adminPassword":"123456"
 }
 
@@ -75,8 +76,8 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "studentName":"student6",
-    "studentEmail":"student6@xmple.com",
+    "studentName":"student2",
+    "studentEmail":"student2@xmple.com",
     "studentPassword":"123456"
 }
 
@@ -94,8 +95,47 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-   "studentEmail":"student10@xmple.com",
+   "studentEmail":"student1@xmple.com",
     "studentPassword":"123456"
 }
 
 ###
+
+POST /api/transaction/2
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "stationaryItemId":"1",
+    "withdrawnQuantity":35,
+    "returnDate":"2023-07-20",
+    "returned":"false"
+}        
+
+###
+
+
+Get /api/transaction
+Host: localhost:8080
+Content-Type: application/json
+
+###        
+
+Get /api/transaction/2
+Host: localhost:8080
+Content-Type: application/json
+Accept: application/json
+
+###        
+
+PATCH /api/transaction/6
+Host: localhost:8080
+Content-Type: application/json
+Accept: application/json
+
+{
+    "returnDate": "2023-07-24",
+    "returned": false
+}
+
+###      

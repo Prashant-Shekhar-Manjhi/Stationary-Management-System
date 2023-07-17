@@ -34,9 +34,10 @@ public class StationaryItemService {
     public StationaryItem getOneItem(Integer itemId){
         try{
             Optional<StationaryItem> fetchedItem = repository.findById(itemId);
-            return fetchedItem.get();
+            if(fetchedItem.isPresent()) return  fetchedItem.get();
+            else return null;
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw e;
         }
     }
     
@@ -57,8 +58,11 @@ public class StationaryItemService {
 
             if(item.getItemName() != null) fetchedItem.setItemName(item.getItemName());
 
-            if(item.getReturnable() != null) fetchedItem.setReturnable(item.getReturnable());
-            else fetchedItem.setReturnable(false);
+            if(item.getReturnable() != null){
+                if(item.getReturnable() == true) fetchedItem.setReturnable(true);
+                else fetchedItem.setReturnable(false);
+            }
+            else fetchedItem.setReturnable(fetchedItem.getReturnable());
 
             if(item.getQuantity() != null) fetchedItem.setQuantity(item.getQuantity());
 

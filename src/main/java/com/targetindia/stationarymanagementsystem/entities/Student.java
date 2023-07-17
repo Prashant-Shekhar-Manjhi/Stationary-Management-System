@@ -1,5 +1,6 @@
 package com.targetindia.stationarymanagementsystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class Student {
     @Column(name = "student_email", unique = true)
     private String studentEmail;
 
+    @JsonIgnore
     @Column(name = "student_password")
     private String studentPassword;
 

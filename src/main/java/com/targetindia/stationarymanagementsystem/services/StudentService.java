@@ -33,7 +33,7 @@ public class StudentService {
 
 
     //Handle Login of Student
-    public StudentDTO studentLogin(StudentLoginDTO loginDTO){
+    public Student studentLogin(StudentLoginDTO loginDTO){
         try{
             Student fetchedStudentByEmail = repository.findByStudentEmail(loginDTO.getStudentEmail());
             if(fetchedStudentByEmail != null){
@@ -41,13 +41,7 @@ public class StudentService {
                 String encodedPassword = fetchedStudentByEmail.getStudentPassword();
                 if(passwordEncoder.matches(password, encodedPassword)){
                     Optional<Student> res = repository.findOneByStudentEmailAndStudentPassword(loginDTO.getStudentEmail(), encodedPassword);
-                    if(res.isPresent()){
-                        StudentDTO studentDTO = new StudentDTO();
-                        studentDTO.setStudentEmail(res.get().getStudentEmail());
-                        studentDTO.setStudentName(res.get().getStudentName());
-                        studentDTO.setStudentId(res.get().getStudentId());
-                        return studentDTO;
-                    }
+                    if(res.isPresent()) return res.get();
                     else return null;
                 }
                 throw new Exception("Incorrect Password");
@@ -61,6 +55,16 @@ public class StudentService {
     public List<Student> getAllStudent(){
         try {
             return repository.findAll();
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
+    public Student findStudentById(Integer studentId) {
+        try {
+            Optional<Student> result = repository.findById(studentId);
+            if(result.isPresent()) return result.get();
+            return null;
         }catch (Exception e){
             throw e;
         }

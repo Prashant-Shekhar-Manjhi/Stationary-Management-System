@@ -1,6 +1,5 @@
 package com.targetindia.stationarymanagementsystem.controllers;
 
-import com.targetindia.stationarymanagementsystem.dto.AdminLoginDTO;
 import com.targetindia.stationarymanagementsystem.dto.StudentDTO;
 import com.targetindia.stationarymanagementsystem.dto.StudentLoginDTO;
 import com.targetindia.stationarymanagementsystem.entities.Student;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/student")
 public class StudentController {
     @Autowired
@@ -24,7 +24,7 @@ public class StudentController {
     @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
     public ResponseEntity handleStudentLogin(@RequestBody StudentLoginDTO loginDTO){
         try{
-            StudentDTO student = service.studentLogin(loginDTO);
+            Student student = service.studentLogin(loginDTO);
             return ResponseEntity.ok(new StudentLoginResponse("Login Successful", true, student));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new StudentLoginResponse("Incorrect Email or Password", false));
