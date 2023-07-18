@@ -25,7 +25,7 @@ public class Student {
     @Column(name = "student_password")
     private String studentPassword;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "student_id")
     private List<Transaction> transactions;
 }

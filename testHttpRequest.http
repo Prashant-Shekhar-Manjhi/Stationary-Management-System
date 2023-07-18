@@ -5,14 +5,14 @@ Accept: application/json
 
 {
 
-    "itemName": "sharpner",
+    "itemName": "eraser",
     "quantity": 100,
     "returnable": true
 }
 
 ###
 
-GET /api/stationaryItem/3
+GET /api/stationaryItem/6
 Host: localhost:8080
 Accept: application/json
 
@@ -24,7 +24,7 @@ Accept: application/json
 
 ###
 
-PATCH  /api/stationaryItem/3
+PATCH  /api/stationaryItem/5
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
@@ -37,7 +37,7 @@ Accept: application/json
 
 ###
 
-DELETE /api/stationaryItem/4
+DELETE /api/stationaryItem/2
 Host: localhost:8080
 Accept: application/json
 
@@ -49,8 +49,8 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "adminName":"admin8",
-    "adminEmail":"admin8@xmple.com",
+    "adminName":"admin9",
+    "adminEmail":"admin9@xmple.com",
     "adminPassword":"123456"
 }
 
@@ -65,7 +65,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 { 
-    "adminEmail": "admin5@xmple.com",
+    "adminEmail": "admin9@xmple.com",
     "adminPassword":"123456"
 }
 
@@ -76,8 +76,8 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "studentName":"student2",
-    "studentEmail":"student2@xmple.com",
+    "studentName":"student3",
+    "studentEmail":"student3@xmple.com",
     "studentPassword":"123456"
 }
 
@@ -95,18 +95,18 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-   "studentEmail":"student1@xmple.com",
+   "studentEmail":"student3@xmple.com",
     "studentPassword":"123456"
 }
 
 ###
 
-POST /api/transaction/2
+POST /api/transaction/4
 Host: localhost:8080
 Content-Type: application/json
 
 {
-    "stationaryItemId":"5",
+    "stationaryItemId":"2",
     "withdrawnQuantity":35,
     "returnDate":"2023-07-20",
     "returned":"false"
@@ -138,7 +138,7 @@ Accept: application/json
 ###
 
 #get All by studentId
-Get /api/transaction/all/byItemId?id=1
+Get /api/transaction/all/byItemId?id=2
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
@@ -153,7 +153,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "transactionId":7,
+    "transactionId":6,
     "returnDate":"2023-07-25",
     "returned": true
 }
