@@ -20,7 +20,6 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/transaction")
 public class TransactionController  implements Serializable {
 
