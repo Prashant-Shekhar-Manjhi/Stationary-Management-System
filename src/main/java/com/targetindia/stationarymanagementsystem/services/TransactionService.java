@@ -1,9 +1,11 @@
 package com.targetindia.stationarymanagementsystem.services;
 
 import com.targetindia.stationarymanagementsystem.dto.TransactionDTO;
+import com.targetindia.stationarymanagementsystem.entities.StationaryItem;
 import com.targetindia.stationarymanagementsystem.entities.Student;
 import com.targetindia.stationarymanagementsystem.entities.Transaction;
 import com.targetindia.stationarymanagementsystem.exception.DaoException;
+import com.targetindia.stationarymanagementsystem.repository.StationaryItemRepository;
 import com.targetindia.stationarymanagementsystem.repository.StudentRepository;
 import com.targetindia.stationarymanagementsystem.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class TransactionService{
     private TransactionRepository repository;
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private StationaryItemRepository stationaryItemRepository;
 
     //create transaction....
     public Transaction createOneTransaction(Transaction transaction){
@@ -47,12 +52,31 @@ public class TransactionService{
         }
     }
 
-    public List<Transaction> findAllById(List<Integer> ids){
+    public List<Transaction> findAllTransactionByStudentId(Integer studentId) throws DaoException {
         try {
-            List<Transaction>result = repository.findAllById(ids);
-            return result;
+            Optional<Student> result = studentRepository.findById(studentId);
+            if(result.isPresent()){
+                Student student = result.get();
+                List<Transaction>list = repository.findAllByStudent(student);
+                return list;
+            }
+            else throw new Exception("Student Id not valid!");
         }catch (Exception e){
-            throw e;
+            throw new DaoException(e.getMessage());
+        }
+    }
+
+    public List<Transaction> findAllTransactionByItemId(Integer itemId) throws DaoException {
+        try {
+            Optional<StationaryItem> result = stationaryItemRepository.findById(itemId);
+            if(result.isPresent()){
+                StationaryItem stationaryItem = result.get();
+                List<Transaction>list = repository.findAllByStationaryItem(stationaryItem);
+                return list;
+            }
+            else throw new Exception("Item Id not valid!");
+        }catch (Exception e){
+            throw new DaoException(e.getMessage());
         }
     }
     public List<Transaction> findAllTransactions(){

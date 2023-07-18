@@ -54,7 +54,7 @@ public class TransactionController  implements Serializable {
         }
     }
 
-    @GetMapping(path = "/{id}", produces = "application/json")
+    @GetMapping(path = "/{id}",produces = "application/json")
     public ResponseEntity handleFindOneTransaction(@PathVariable Integer id){
         try {
             Transaction result = service.findOneTransaction(id);
@@ -71,6 +71,47 @@ public class TransactionController  implements Serializable {
         }
     }
 
+    @GetMapping(path = "/all/byStudentId", produces = "application/json")
+    public ResponseEntity handleFindAllTransactionByStudentId(@RequestParam("id") Integer studentId){
+        try {
+            List <Transaction> transactionList = service.findAllTransactionByStudentId(studentId);
+            List <TransactionDTO> transactionDTOList = transactionList.stream()
+                    .map(transaction -> {
+                        TransactionDTO temp = new TransactionDTO();
+                        temp.setTransactionId(transaction.getTransactionId());
+                        temp.setStudentId(transaction.getStudent().getStudentId());
+                        temp.setWithdrawnQuantity(transaction.getWithdrawnQuantity());
+                        temp.setReturned(transaction.getReturned());
+                        temp.setReturnDate(transaction.getReturnDate());
+                        temp.setStationaryItemId(transaction.getStationaryItem().getItemId());
+                        return temp;
+                    }).toList();
+            return ResponseEntity.ok(transactionDTOList);
+        }catch (DaoException e){
+            return ResponseEntity.status(500).body(new Message(e.getMessage()));
+        }
+    }
+
+    @GetMapping(path = "/all/byItemId", produces = "application/json")
+    public ResponseEntity handleFindAllTransactionByItemId(@RequestParam("id") Integer itemId){
+        try {
+            List <Transaction> transactionList = service.findAllTransactionByItemId(itemId);
+            List <TransactionDTO> transactionDTOList = transactionList.stream()
+                    .map(transaction -> {
+                        TransactionDTO temp = new TransactionDTO();
+                        temp.setTransactionId(transaction.getTransactionId());
+                        temp.setStudentId(transaction.getStudent().getStudentId());
+                        temp.setWithdrawnQuantity(transaction.getWithdrawnQuantity());
+                        temp.setReturned(transaction.getReturned());
+                        temp.setReturnDate(transaction.getReturnDate());
+                        temp.setStationaryItemId(transaction.getStationaryItem().getItemId());
+                        return temp;
+                    }).toList();
+            return ResponseEntity.ok(transactionDTOList);
+        }catch (DaoException e){
+            return ResponseEntity.status(500).body(new Message(e.getMessage()));
+        }
+    }
 
     //Handle Post Mapping...
     @PostMapping(path = "/{studentId}",produces = "application/json", consumes = "application/json")

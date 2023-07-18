@@ -119,14 +119,33 @@ Get /api/transaction
 Host: localhost:8080
 Content-Type: application/json
 
-###        
+###  
 
-Get /api/transaction/6
+#get by transactionId
+Get /api/transaction/3
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
 
-###        
+###
+
+#get All by studentId
+Get /api/transaction/all/byStudentId?id=1
+Host: localhost:8080
+Content-Type: application/json
+Accept: application/json
+
+###
+
+#get All by studentId
+Get /api/transaction/all/byItemId?id=1
+Host: localhost:8080
+Content-Type: application/json
+Accept: application/json
+
+###
+
+
 
 PATCH /api/transaction/2
 Host: localhost:8080

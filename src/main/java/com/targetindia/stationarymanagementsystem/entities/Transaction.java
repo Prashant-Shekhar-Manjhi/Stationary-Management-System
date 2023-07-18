@@ -3,8 +3,6 @@ package com.targetindia.stationarymanagementsystem.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.io.Serializable;
 import java.util.Date;
 
 @Data

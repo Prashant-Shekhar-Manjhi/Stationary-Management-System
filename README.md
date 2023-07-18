@@ -25,7 +25,9 @@
 
     2. findOneTransaction    -  http://[hostname:port]/api/transaction/[transactionId]              (Method - GET)
     3. findAllTransaction    -  http://[hostname:port]/api/transaction/                             (Method - GET)
-    4. UpdateOneTransaction  -  http://[hostname:port]/api/transaction/[studentId]                  (Method - PATCH)
+    4. findAllByStudentId    -  http://[hostname:port]/api/transaction/all/byStudentId?id=1         (Method - GET)
+    5. findAllByItemId       -  http://[hostname:port]/api/transaction/all/byItemId?id=1            (Method - GET)
+    6. UpdateOneTransaction  -  http://[hostname:port]/api/transaction/[studentId]                  (Method - PATCH)
 
         {
             "transactionId":7,  //(must)
