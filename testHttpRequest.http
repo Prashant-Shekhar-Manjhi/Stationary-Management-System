@@ -106,7 +106,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "stationaryItemId":"1",
+    "stationaryItemId":"5",
     "withdrawnQuantity":35,
     "returnDate":"2023-07-20",
     "returned":"false"
@@ -121,21 +121,22 @@ Content-Type: application/json
 
 ###        
 
-Get /api/transaction/2
+Get /api/transaction/6
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
 
 ###        
 
-PATCH /api/transaction/6
+PATCH /api/transaction/2
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
 
 {
-    "returnDate": "2023-07-24",
-    "returned": false
+    "transactionId":7,
+    "returnDate":"2023-07-25",
+    "returned": true
 }
 
 ###      

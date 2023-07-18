@@ -4,6 +4,7 @@ import com.targetindia.stationarymanagementsystem.dto.TransactionDTO;
 import com.targetindia.stationarymanagementsystem.entities.StationaryItem;
 import com.targetindia.stationarymanagementsystem.entities.Student;
 import com.targetindia.stationarymanagementsystem.entities.Transaction;
+import com.targetindia.stationarymanagementsystem.exception.DaoException;
 import com.targetindia.stationarymanagementsystem.model.Message;
 import com.targetindia.stationarymanagementsystem.services.StationaryItemService;
 import com.targetindia.stationarymanagementsystem.services.StudentService;
@@ -104,11 +105,11 @@ public class TransactionController  implements Serializable {
         }
     }
     //Handle Patch Mapping...
-    @PatchMapping(path = "/{id}", produces = "application/json", consumes = "application/json")
-    public ResponseEntity handleUpdateTransaction(@PathVariable Integer id, @RequestBody TransactionDTO transactionDTO){
+    @PatchMapping(path = "/{studentId}", produces = "application/json", consumes = "application/json")
+    public ResponseEntity handleUpdateTransaction(@PathVariable Integer studentId, @RequestBody TransactionDTO transactionDTO){
         try {
-            transactionDTO.setTransactionId(id);
-            Transaction result = service.updateTransaction(transactionDTO);
+//            transactionDTO.setTransactionId(id);
+            Transaction result = service.updateTransaction(studentId, transactionDTO);
 
             TransactionDTO res = new TransactionDTO();
             res.setTransactionId(result.getTransactionId());
@@ -119,8 +120,8 @@ public class TransactionController  implements Serializable {
             res.setReturnDate(result.getReturnDate());
 
             return ResponseEntity.status(200).body(res);
-        }catch (Exception e){
-            return ResponseEntity.status(500).body(new Message("Not Updated"));
+        }catch (DaoException e){
+            return ResponseEntity.status(500).body(new Message(e.getMessage()));
         }
     }
     //Handle Delete Mapping...

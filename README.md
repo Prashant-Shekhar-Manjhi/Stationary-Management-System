@@ -8,9 +8,32 @@
     5. fetch all Items - http://[hostname:port]/api/stationaryItem         (Method - GET)
     6. update Item -     http://[hostname:port]/api/stationaryItem/[id]    (Method - PATCH)
     7. delete Item  -    http://[hostname:port]/api/stationaryItem/[id]    (Method - DELETE)
-
+   
     8. student signup -   http://[hostname:port]/api/student/register        (Method - POST)
-    9. student login -   http://[hostname:port]/api/student/login           (Method - POST)
+    9.  student login -   http://[hostname:port]/api/student/login           (Method - POST)
+
+### Transaction
+
+    1. create Transaction   - http://[hostname:port]/api/transaction/[studentId]        (Method - POST)
+    
+        {
+            "stationaryItemId":"1",
+            "withdrawnQuantity":35,
+            "returnDate":"2023-07-20",
+            "returned":"false"
+        }  
+
+    2. findOneTransaction    -  http://[hostname:port]/api/transaction/[transactionId]              (Method - GET)
+    3. findAllTransaction    -  http://[hostname:port]/api/transaction/                             (Method - GET)
+    4. UpdateOneTransaction  -  http://[hostname:port]/api/transaction/[studentId]                  (Method - PATCH)
+
+        {
+            "transactionId":7,  //(must)
+            "returned": true,   //(optional)
+            "returnDate":"2023-07-20"   //(optional)
+        }
+
+
 
 
 
