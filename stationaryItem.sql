@@ -1,0 +1,18 @@
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Pen', 100, true, 3, 1);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Pencil', 37, false, 9, 2);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Eraser', 79, false, 2, 3);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Highlighter', 56, true, 10, 4);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('GLu Stick', 37, true, 2, 5);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Board Pin', 52, true, 3, 6);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Calculater', 64, false, 9, 7);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Stapler', 84, false, 7, 8);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Staples', 94, false, 9, 9);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Paper Pin', 87, false, 2, 10);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('White Paper', 54, true, 6, 11);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Binding Adhesive tape', 23, true, 8, 12);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Label Sticker', 89, false, 4, 13);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Scale', 36, false, 3, 14);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Paper Clip', 99, false, 7, 15);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Paper Cutter', 40, false, 3, 16);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Board Marker', 36, false, 3, 17);
+insert into stationary_item (item_name, item_quantity, returnable, max_days, item_id) values ('Permanent Marker', 96, true, 10, 18);

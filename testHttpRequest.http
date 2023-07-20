@@ -7,7 +7,8 @@ Accept: application/json
 
     "itemName": "eraser",
     "quantity": 100,
-    "returnable": true
+    "returnable": true,
+    "maxDays": 5
 }
 
 ###
@@ -37,7 +38,7 @@ Accept: application/json
 
 ###
 
-DELETE /api/stationaryItem/2
+DELETE /api/stationaryItem/4
 Host: localhost:8080
 Accept: application/json
 
@@ -49,9 +50,10 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "adminName":"admin9",
-    "adminEmail":"admin9@xmple.com",
-    "adminPassword":"123456"
+    "adminName":"admin1",
+    "adminEmail":"admin1@gmail.com",
+    "adminPassword":"123456",
+    "dateOfBirth":"2001-05-23"
 }
 
 ###
@@ -65,7 +67,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 { 
-    "adminEmail": "admin9@xmple.com",
+    "adminEmail": "admin1@gmail.com",
     "adminPassword":"123456"
 }
 

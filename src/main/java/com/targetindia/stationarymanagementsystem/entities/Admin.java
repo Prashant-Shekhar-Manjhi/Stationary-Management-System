@@ -3,6 +3,8 @@ package com.targetindia.stationarymanagementsystem.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 @Entity
 @Table(name = "admin")
@@ -21,5 +23,8 @@ public class Admin {
 
     @Column(name = "admin_password")
     private String adminPassword;
+
+    @Column(name = "date_of_birth")
+    private Date dateOfBirth;
 
 }

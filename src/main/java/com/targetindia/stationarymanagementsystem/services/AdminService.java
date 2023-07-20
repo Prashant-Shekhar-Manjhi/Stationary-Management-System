@@ -2,12 +2,12 @@ package com.targetindia.stationarymanagementsystem.services;
 
 import com.targetindia.stationarymanagementsystem.dto.AdminLoginDTO;
 import com.targetindia.stationarymanagementsystem.entities.Admin;
+import com.targetindia.stationarymanagementsystem.exception.DaoException;
 import com.targetindia.stationarymanagementsystem.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+//import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,26 +19,17 @@ public class AdminService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void register(Admin admin){
+    public void register(Admin admin) throws DaoException {
         admin.setAdminPassword(passwordEncoder.encode(admin.getAdminPassword()));
         try{
             adminRepository.save(admin);
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new DaoException(e.getMessage());
         }
-    }
-
-    public List<Admin> getAllAdmin(){
-        try{
-            return adminRepository.findAll();
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
-
     }
 
     //Admin Login...
-    public Admin adminLogin(AdminLoginDTO loginDto){
+    public Admin adminLogin(AdminLoginDTO loginDto) throws DaoException {
         try{
             Admin fetchedAdminByEmail = adminRepository.findByAdminEmail(loginDto.getAdminEmail());
             if(fetchedAdminByEmail != null){
@@ -50,11 +41,11 @@ public class AdminService {
                         return fetchedAdminByEmailAndPassword.get();
                     else return  null;
                 }
-                throw new Exception("Incorrect Password");
+                throw new DaoException("Incorrect Password");
             }
-            else throw new Exception("Incorrect Email");
+            else throw new DaoException("Incorrect Email");
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new DaoException(e);
         }
 
     }

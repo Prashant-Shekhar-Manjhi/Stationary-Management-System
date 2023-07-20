@@ -24,6 +24,9 @@ public class StationaryItem {
     @Column(name = "returnable")
     private Boolean returnable;
 
+    @Column(name = "max_days")
+    private Integer maxDays;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "item_id")
     private List<Transaction> transactions;
