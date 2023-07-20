@@ -25,20 +25,21 @@ Accept: application/json
 
 ###
 
-PATCH  /api/stationaryItem/5
+PATCH  /api/stationaryItem/18
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
 
 
 {
-   "quantity": 100,
-    "returnable": true
+   "quantity": 37,
+    "returnable": true,
+    "maxDays":5
 }
 
 ###
 
-DELETE /api/stationaryItem/4
+DELETE /api/stationaryItem/19
 Host: localhost:8080
 Accept: application/json
 
@@ -50,10 +51,10 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "adminName":"admin1",
-    "adminEmail":"admin1@gmail.com",
+    "adminName":"admin2",
+    "adminEmail":"admin2@gmail.com",
     "adminPassword":"123456",
-    "dateOfBirth":"2001-05-23"
+    "dateOfBirth":"2000-05-28"
 }
 
 ###
@@ -67,7 +68,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 { 
-    "adminEmail": "admin1@gmail.com",
+    "adminEmail": "admin2@gmail.com",
     "adminPassword":"123456"
 }
 
@@ -78,9 +79,10 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "studentName":"student3",
-    "studentEmail":"student3@xmple.com",
-    "studentPassword":"123456"
+    "studentName":"Prashant Shekhar",
+    "studentEmail":"prashant@gmail.com",
+    "studentPassword":"123456",
+    "dateOfBirth":"2001-05-23"
 }
 
 ###
@@ -97,7 +99,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-   "studentEmail":"student3@xmple.com",
+   "studentEmail":"prashant@gmail.com",
     "studentPassword":"123456"
 }
 

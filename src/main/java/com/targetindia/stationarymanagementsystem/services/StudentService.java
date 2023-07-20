@@ -3,6 +3,7 @@ package com.targetindia.stationarymanagementsystem.services;
 import com.targetindia.stationarymanagementsystem.dto.StudentDTO;
 import com.targetindia.stationarymanagementsystem.dto.StudentLoginDTO;
 import com.targetindia.stationarymanagementsystem.entities.Student;
+import com.targetindia.stationarymanagementsystem.exception.DaoException;
 import com.targetindia.stationarymanagementsystem.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,21 +20,22 @@ public class StudentService {
     private PasswordEncoder passwordEncoder;
 
     //HANDLE Registration of Student
-    public void studentRegistration(StudentDTO studentDTO){
+    public void studentRegistration(StudentDTO studentDTO) throws DaoException {
         Student student = new Student();
         student.setStudentEmail(studentDTO.getStudentEmail());
         student.setStudentName(studentDTO.getStudentName());
+        student.setDateOfBirth(studentDTO.getDateOfBirth());
         student.setStudentPassword(passwordEncoder.encode(studentDTO.getStudentPassword()));
         try{
             repository.save(student);
         }catch (Exception e){
-            throw e;
+            throw new DaoException(e.getMessage());
         }
     }
 
 
     //Handle Login of Student
-    public Student studentLogin(StudentLoginDTO loginDTO){
+    public Student studentLogin(StudentLoginDTO loginDTO) throws DaoException {
         try{
             Student fetchedStudentByEmail = repository.findByStudentEmail(loginDTO.getStudentEmail());
             if(fetchedStudentByEmail != null){
@@ -48,7 +50,7 @@ public class StudentService {
             }
             else throw new Exception("Incorrect Email");
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new DaoException(e.getMessage());
         }
     }
 
@@ -60,13 +62,13 @@ public class StudentService {
         }
     }
 
-    public Student findStudentById(Integer studentId) {
+    public Student findStudentById(Integer studentId) throws DaoException {
         try {
             Optional<Student> result = repository.findById(studentId);
             if(result.isPresent()) return result.get();
             return null;
         }catch (Exception e){
-            throw e;
+            throw new DaoException(e.getMessage());
         }
     }
 }

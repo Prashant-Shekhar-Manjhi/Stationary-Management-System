@@ -61,7 +61,10 @@ public class StationaryItemService {
 
             if(item.getReturnable() != null){
                 if(item.getReturnable() == true) fetchedItem.setReturnable(true);
-                else fetchedItem.setReturnable(false);
+                else{
+                    fetchedItem.setReturnable(false);
+                    fetchedItem.setMaxDays(null);
+                }
             }
             else fetchedItem.setReturnable(fetchedItem.getReturnable());
 
@@ -84,14 +87,11 @@ public class StationaryItemService {
                 repository.deleteById(itemId);
                 return fetchedItem;
             }else
-                throw new RuntimeException("Item Not Found with id "+itemId);
+                throw new Exception("Item Not Found with id "+itemId);
         }catch (Exception e){
             throw new DaoException(e.getMessage());
         }
 
     }
-    
-    public void deleteAllItems(){
-        // TODO: 7/14/2023  
-    }
+
 }
