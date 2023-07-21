@@ -27,7 +27,7 @@ public class StudentController {
             Student student = service.studentLogin(loginDTO);
             return ResponseEntity.ok(new StudentLoginResponse("Login Successful", true, student));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new StudentLoginResponse("Incorrect Email or Password", false));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new StudentLoginResponse(e.getMessage(), false));
         }
     }
 

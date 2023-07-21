@@ -42,7 +42,7 @@ public class AdminController {
                 return ResponseEntity.ok(new AdminLoginResponse("Login Successful", true ,adminResponseDto));
             }
         }catch (Exception e){
-            return ResponseEntity.status(401).body(new AdminLoginResponse("Incorrect email or password", false));
+            return ResponseEntity.status(401).body(new AdminLoginResponse(e.getMessage(), false));
         }
     }
 

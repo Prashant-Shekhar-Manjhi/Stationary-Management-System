@@ -51,8 +51,8 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "adminName":"admin2",
-    "adminEmail":"admin2@gmail.com",
+    "adminName":"admin3",
+    "adminEmail":"admin3@gmail.com",
     "adminPassword":"123456",
     "dateOfBirth":"2000-05-28"
 }
@@ -68,7 +68,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 { 
-    "adminEmail": "admin2@gmail.com",
+    "adminEmail": "admin3@gmail.com",
     "adminPassword":"123456"
 }
 

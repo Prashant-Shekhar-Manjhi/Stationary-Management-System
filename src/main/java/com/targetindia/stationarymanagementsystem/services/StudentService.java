@@ -41,12 +41,8 @@ public class StudentService {
             if(fetchedStudentByEmail != null){
                 String password = loginDTO.getStudentPassword();
                 String encodedPassword = fetchedStudentByEmail.getStudentPassword();
-                if(passwordEncoder.matches(password, encodedPassword)){
-                    Optional<Student> res = repository.findOneByStudentEmailAndStudentPassword(loginDTO.getStudentEmail(), encodedPassword);
-                    if(res.isPresent()) return res.get();
-                    else return null;
-                }
-                throw new Exception("Incorrect Password");
+                if(passwordEncoder.matches(password, encodedPassword)) return fetchedStudentByEmail;
+                else throw new Exception("Incorrect Password");
             }
             else throw new Exception("Incorrect Email");
         }catch (Exception e){

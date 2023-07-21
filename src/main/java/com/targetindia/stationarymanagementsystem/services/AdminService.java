@@ -34,17 +34,12 @@ public class AdminService {
             if(fetchedAdminByEmail != null){
                 String password = loginDto.getAdminPassword();
                 String encodedPassword = fetchedAdminByEmail.getAdminPassword();
-                if(passwordEncoder.matches(password, encodedPassword)){
-                    Optional<Admin> fetchedAdminByEmailAndPassword = adminRepository.findOneByAdminEmailAndAdminPassword(loginDto.getAdminEmail(), encodedPassword);
-                    if(fetchedAdminByEmailAndPassword.isPresent())
-                        return fetchedAdminByEmailAndPassword.get();
-                    else return  null;
-                }
-                throw new DaoException("Incorrect Password");
+                if(passwordEncoder.matches(password, encodedPassword)) return fetchedAdminByEmail;
+                else throw new DaoException("Incorrect Password");
             }
             else throw new DaoException("Incorrect Email");
         }catch (Exception e){
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage());
         }
 
     }
