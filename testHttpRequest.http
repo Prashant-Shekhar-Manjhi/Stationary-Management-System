@@ -1,86 +1,86 @@
-POST /api/stationaryItem/save
+POST /inventory/v1/stationary_item/add_item
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
 
 {
-
-    "itemName": "eraser",
+    
+    "itemName": "Permanent Marker",
     "quantity": 100,
+    "returnable":true,
+    "maxDays": 5
+}
+
+###
+
+GET /inventory/v1/stationary_item/1
+Host: localhost:8080
+Accept: application/json
+
+###
+
+GET /inventory/v1/stationary_item
+Host: localhost:8080
+Accept: application/json
+
+###
+
+PATCH /inventory/v1/stationary_item/18
+Host: localhost:8080
+Content-Type: application/json
+Accept: application/json
+
+
+{
+   "quantity": 100,
     "returnable": true,
     "maxDays": 5
 }
 
 ###
 
-GET /api/stationaryItem/6
-Host: localhost:8080
-Accept: application/json
-
-###
-
-GET /api/stationaryItem
-Host: localhost:8080
-Accept: application/json
-
-###
-
-PATCH  /api/stationaryItem/18
-Host: localhost:8080
-Content-Type: application/json
-Accept: application/json
-
-
-{
-   "quantity": 37,
-    "returnable": true,
-    "maxDays":5
-}
-
-###
-
-DELETE /api/stationaryItem/19
+DELETE /inventory/v1/stationary_item/1
 Host: localhost:8080
 Accept: application/json
 
 
 ###
 
-POST /api/admin/register
+POST /inventory/v1/admin
 Host: localhost:8080
 Content-Type: application/json
 
 {
-    "adminName":"admin3",
-    "adminEmail":"admin3@gmail.com",
+    "adminName":"admin5",
+    "adminEmail":"admin5@gmail.com",
     "adminPassword":"123456",
     "dateOfBirth":"2000-05-28"
 }
 
 ###
-GET /api/admin
+GET /inventory/v1/admin
 Host: localhost:8080
 Accept: application/json
 
 ###
-POST /api/admin/login
+POST /inventory/v1/admin/login
 Host: localhost:8080
 Content-Type: application/json
 
 { 
-    "adminEmail": "admin3@gmail.com",
+    "adminEmail": "admin5@gmail.com",
     "adminPassword":"123456"
 }
 
 ###
 
-POST /api/student/register
+POST /inventory/v1/student
 Host: localhost:8080
 Content-Type: application/json
 
 {
-    "studentName":"Prashant Shekhar",
-    "studentEmail":"prashant@gmail.com",
+    "studentName":"Sameer Shekhar",
+    "studentEmail":"sameer@gmail.com",
     "studentPassword":"123456",
     "dateOfBirth":"2001-05-23"
 }
@@ -88,13 +88,13 @@ Content-Type: application/json
 ###
 
 
-GET /api/student
+GET /inventory/v1/student
 Host: localhost:8080
 Accept: application/json
 
 ###
 
-POST /api/student/login
+POST /inventory/v1/student/login
 Host: localhost:8080
 Content-Type: application/json
 
@@ -105,28 +105,28 @@ Content-Type: application/json
 
 ###
 
-POST /api/transaction/4
+POST /inventory/v1/transaction/1
 Host: localhost:8080
 Content-Type: application/json
 
 {
-    "stationaryItemId":"2",
+    "stationaryItemId":"18",
     "withdrawnQuantity":35,
     "returnDate":"2023-07-20",
-    "returned":"false"
+    "returned":"true"
 }        
 
 ###
 
 
-Get /api/transaction
+Get /inventory/v1/transaction
 Host: localhost:8080
 Content-Type: application/json
 
 ###  
 
 #get by transactionId
-Get /api/transaction/3
+Get /inventory/v1/transaction/2
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
@@ -134,7 +134,7 @@ Accept: application/json
 ###
 
 #get All by studentId
-Get /api/transaction/all/byStudentId?id=1
+Get /inventory/v1/transaction/all/by_student_id?id=3
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
@@ -142,7 +142,7 @@ Accept: application/json
 ###
 
 #get All by studentId
-Get /api/transaction/all/byItemId?id=2
+Get /inventory/v1/transaction/all/by_item_id?id=1
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
@@ -151,14 +151,13 @@ Accept: application/json
 
 
 
-PATCH /api/transaction/2
+PATCH /inventory/v1/transaction/2
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
 
 {
-    "transactionId":6,
-    "returnDate":"2023-07-25",
+    "returnDate":"2023-07-27",
     "returned": true
 }
 

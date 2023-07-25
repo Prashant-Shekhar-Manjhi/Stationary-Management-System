@@ -1,5 +1,6 @@
 package com.targetindia.stationarymanagementsystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,16 +13,17 @@ public class Admin {
 
     @Id
     @GeneratedValue(generator = "increment")
-    @Column(name = "admin_id")
+    @Column(name = "admin_id", nullable = false)
     private Integer adminId;
 
-    @Column(name = "admin_name")
+    @Column(name = "admin_name", nullable = false)
     private String adminName;
 
-    @Column(name = "admin_email", unique = true)
+    @Column(name = "admin_email", unique = true, nullable = false)
     private String adminEmail;
 
-    @Column(name = "admin_password")
+    @JsonIgnore
+    @Column(name = "admin_password", nullable = false)
     private String adminPassword;
 
     @Column(name = "date_of_birth")

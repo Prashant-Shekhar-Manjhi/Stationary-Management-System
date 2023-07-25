@@ -16,20 +16,21 @@ public class Student {
     @Column(name = "student_id")
     private Integer studentId;
 
-    @Column(name = "student_name")
+    @Column(name = "student_name", nullable = false)
     private String studentName;
 
-    @Column(name = "student_email", unique = true)
+    @Column(name = "student_email", unique = true, nullable = false)
     private String studentEmail;
 
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
     @JsonIgnore
-    @Column(name = "student_password")
+    @Column(name = "student_password", nullable = false)
     private String studentPassword;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "student_id")
     private List<Transaction> transactions;
 }

@@ -1,4 +1,4 @@
-package com.targetindia.stationarymanagementsystem.controllers;
+package com.targetindia.stationarymanagementsystem.web.controllers;
 
 import com.targetindia.stationarymanagementsystem.dto.StudentDTO;
 import com.targetindia.stationarymanagementsystem.dto.StudentLoginDTO;
@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.targetindia.stationarymanagementsystem.web.validators.StudentValidator.isStudentCredentialValid;
+import static com.targetindia.stationarymanagementsystem.web.validators.StudentValidator.isStudentValid;
+
 @RestController
 @CrossOrigin
-@RequestMapping("/api/student")
+@RequestMapping("/inventory/v1/student")
 public class StudentController {
     @Autowired
     private StudentService service;
@@ -23,6 +26,9 @@ public class StudentController {
     //login...
     @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
     public ResponseEntity handleStudentLogin(@RequestBody StudentLoginDTO loginDTO){
+        if(!isStudentCredentialValid(loginDTO)){
+            return ResponseEntity.status(400).body(new Message("Invalid Inputs"));
+        }
         try{
             Student student = service.studentLogin(loginDTO);
             return ResponseEntity.ok(new StudentLoginResponse("Login Successful", true, student));
@@ -31,8 +37,11 @@ public class StudentController {
         }
     }
 
-    @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity handleRegistration(@RequestBody StudentDTO studentDTO){
+        if(!isStudentValid(studentDTO)){
+            return ResponseEntity.status(400).body(new Message("Invalid Inputs."));
+        }
         try{
             service.studentRegistration(studentDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(new Message("Registration Successful"));

@@ -17,12 +17,12 @@ public class Transaction{
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="student_id", nullable = false)
+    @JoinColumn(name="student_id")
     private Student student;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "item_id", nullable = false)
+    @JoinColumn(name = "item_id")
     private StationaryItem stationaryItem;
 
     @JsonIgnore

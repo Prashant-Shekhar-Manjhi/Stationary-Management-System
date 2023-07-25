@@ -1,5 +1,6 @@
 package com.targetindia.stationarymanagementsystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -27,7 +28,8 @@ public class StationaryItem {
     @Column(name = "max_days")
     private Integer maxDays;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "item_id")
     private List<Transaction> transactions;
 }

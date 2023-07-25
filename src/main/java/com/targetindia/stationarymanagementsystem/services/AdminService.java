@@ -3,11 +3,11 @@ package com.targetindia.stationarymanagementsystem.services;
 import com.targetindia.stationarymanagementsystem.dto.AdminLoginDTO;
 import com.targetindia.stationarymanagementsystem.entities.Admin;
 import com.targetindia.stationarymanagementsystem.exception.DaoException;
+import com.targetindia.stationarymanagementsystem.exception.ItemNotFoundException;
 import com.targetindia.stationarymanagementsystem.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
 
 @Service
 public class AdminService {
@@ -35,9 +35,9 @@ public class AdminService {
                 String password = loginDto.getAdminPassword();
                 String encodedPassword = fetchedAdminByEmail.getAdminPassword();
                 if(passwordEncoder.matches(password, encodedPassword)) return fetchedAdminByEmail;
-                else throw new DaoException("Incorrect Password");
+                else throw new ItemNotFoundException("Incorrect Password");
             }
-            else throw new DaoException("Incorrect Email");
+            else throw new ItemNotFoundException("Incorrect Email");
         }catch (Exception e){
             throw new DaoException(e.getMessage());
         }
