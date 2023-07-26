@@ -39,7 +39,7 @@ Accept: application/json
 
 ###
 
-DELETE /inventory/v1/stationary_item/1
+DELETE /inventory/v1/stationary_item/18
 Host: localhost:8080
 Accept: application/json
 
@@ -79,8 +79,8 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "studentName":"Sameer Shekhar",
-    "studentEmail":"sameer@gmail.com",
+    "studentName":"Atul Shekhar",
+    "studentEmail":"atul@gmail.com",
     "studentPassword":"123456",
     "dateOfBirth":"2001-05-23"
 }
@@ -99,7 +99,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-   "studentEmail":"prashant@gmail.com",
+   "studentEmail":"atul@gmail.com",
     "studentPassword":"123456"
 }
 
@@ -111,9 +111,9 @@ Content-Type: application/json
 
 {
     "stationaryItemId":"18",
-    "withdrawnQuantity":35,
-    "returnDate":"2023-07-20",
-    "returned":"true"
+    "withdrawnQuantity":0,
+    "returnDate":"2023",
+    "returned":"false"
 }        
 
 ###
@@ -126,7 +126,7 @@ Content-Type: application/json
 ###  
 
 #get by transactionId
-Get /inventory/v1/transaction/2
+Get /inventory/v1/transaction/1
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
@@ -134,7 +134,7 @@ Accept: application/json
 ###
 
 #get All by studentId
-Get /inventory/v1/transaction/all/by_student_id?id=3
+Get /inventory/v1/transaction/all/by_student_id?id=1
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
@@ -142,7 +142,7 @@ Accept: application/json
 ###
 
 #get All by studentId
-Get /inventory/v1/transaction/all/by_item_id?id=1
+Get /inventory/v1/transaction/all/by_item_id?id=18
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
@@ -157,7 +157,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "returnDate":"2023-07-27",
+    "returnDate":"2023-07-29",
     "returned": true
 }
 

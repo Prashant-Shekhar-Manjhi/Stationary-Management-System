@@ -29,7 +29,7 @@ public class Student {
     @Column(name = "student_password", nullable = false)
     private String studentPassword;
 
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "student_id")
     private List<Transaction> transactions;
