@@ -13,7 +13,7 @@ Accept: application/json
 
 ###
 
-GET /inventory/v1/stationary_item/1
+GET /inventory/v1/stationary_item/2
 Host: localhost:8080
 Accept: application/json
 
@@ -105,14 +105,14 @@ Content-Type: application/json
 
 ###
 
-POST /inventory/v1/transaction/1
+POST /inventory/v1/transaction/3
 Host: localhost:8080
 Content-Type: application/json
 
 {
-    "stationaryItemId":"18",
-    "withdrawnQuantity":0,
-    "returnDate":"2023",
+    "stationaryItemId":"3",
+    "withdrawnQuantity":1,
+    "returnDate":"2023-08-12",
     "returned":"false"
 }        
 
@@ -134,7 +134,7 @@ Accept: application/json
 ###
 
 #get All by studentId
-Get /inventory/v1/transaction/all/by_student_id?id=1
+Get /inventory/v1/transaction/all/by_student_id?id=3
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json
@@ -151,7 +151,7 @@ Accept: application/json
 
 
 
-PATCH /inventory/v1/transaction/2
+PATCH /inventory/v1/transaction/4
 Host: localhost:8080
 Content-Type: application/json
 Accept: application/json

@@ -98,13 +98,16 @@ public class TransactionService{
                 Transaction res = result.get();
                 if(transaction.getReturnDate() != null) res.setReturnDate(transaction.getReturnDate());
                 if(transaction.getReturned() != null){
+                    StationaryItem item = stationaryItemRepository.findById(res.getStationaryItem().getItemId()).get();
                     if(transaction.getReturned() == true){
                         res.setReturned(true);
-                        StationaryItem item = stationaryItemRepository.findById(res.getStationaryItem().getItemId()).get();
                         item.setQuantity(res.getStationaryItem().getQuantity()+res.getWithdrawnQuantity());
-                        stationaryItemRepository.save(item);
                     }
-                    else res.setReturned(false);
+                    else{
+                        res.setReturned(false);
+                        item.setQuantity(res.getStationaryItem().getQuantity()-res.getWithdrawnQuantity());
+                    }
+                    stationaryItemRepository.save(item);
                 }else res.setReturned(res.getReturned());
                 repository.save(res);
                 return res;
