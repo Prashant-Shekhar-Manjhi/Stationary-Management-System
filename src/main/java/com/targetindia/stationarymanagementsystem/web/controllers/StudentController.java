@@ -6,6 +6,7 @@ import com.targetindia.stationarymanagementsystem.entities.Student;
 import com.targetindia.stationarymanagementsystem.model.Message;
 import com.targetindia.stationarymanagementsystem.model.StudentLoginResponse;
 import com.targetindia.stationarymanagementsystem.services.StudentService;
+import com.targetindia.stationarymanagementsystem.web.validators.StudentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.targetindia.stationarymanagementsystem.web.validators.StudentValidator.isStudentCredentialValid;
-import static com.targetindia.stationarymanagementsystem.web.validators.StudentValidator.isStudentValid;
 
 @RestController
 @CrossOrigin
@@ -23,10 +22,13 @@ public class StudentController {
     @Autowired
     private StudentService service;
 
+    @Autowired
+    private StudentValidator validator;
+
     //login...
     @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
     public ResponseEntity handleStudentLogin(@RequestBody StudentLoginDTO loginDTO){
-        if(!isStudentCredentialValid(loginDTO)){
+        if(!validator.isStudentCredentialValid(loginDTO)){
             return ResponseEntity.status(400).body(new Message("Invalid Inputs"));
         }
         try{
@@ -39,7 +41,7 @@ public class StudentController {
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity handleRegistration(@RequestBody StudentDTO studentDTO){
-        if(!isStudentValid(studentDTO)){
+        if(!validator.isStudentValid(studentDTO)){
             return ResponseEntity.status(400).body(new Message("Invalid Inputs."));
         }
         try{

@@ -11,13 +11,12 @@ import com.targetindia.stationarymanagementsystem.model.Message;
 import com.targetindia.stationarymanagementsystem.services.StationaryItemService;
 import com.targetindia.stationarymanagementsystem.services.StudentService;
 import com.targetindia.stationarymanagementsystem.services.TransactionService;
+import com.targetindia.stationarymanagementsystem.web.validators.TransactionValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static com.targetindia.stationarymanagementsystem.web.validators.TransactionValidator.isTransactionValid;
 
 
 @RestController
@@ -30,6 +29,9 @@ public class TransactionController{
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private TransactionValidator validator;
 
     @Autowired
     private StationaryItemService stationaryItemService;
@@ -123,7 +125,7 @@ public class TransactionController{
     @PostMapping(path = "/{studentId}",produces = "application/json", consumes = "application/json")
     public ResponseEntity handleCreateTransaction(@PathVariable Integer studentId, @RequestBody TransactionRequestDTO transactionDT){
         //Validation...
-        if(!isTransactionValid(transactionDT)){
+        if(!validator.isTransactionValid(transactionDT)){
             return ResponseEntity.status(400).body(new Message("Bad Request"));
         }
         try {

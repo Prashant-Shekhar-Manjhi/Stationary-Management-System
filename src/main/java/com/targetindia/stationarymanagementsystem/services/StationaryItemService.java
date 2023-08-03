@@ -4,6 +4,7 @@ import com.targetindia.stationarymanagementsystem.entities.StationaryItem;
 import com.targetindia.stationarymanagementsystem.exception.DaoException;
 import com.targetindia.stationarymanagementsystem.exception.ItemNotFoundException;
 import com.targetindia.stationarymanagementsystem.repository.StationaryItemRepository;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +13,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
+@NoArgsConstructor
 @Service
 public class StationaryItemService {
 
     @Autowired
     private StationaryItemRepository repository;
+
+    public StationaryItemService(StationaryItemRepository repository){
+        this.repository = repository;
+    }
     
     //CRUD 
     //CREATE ITEM
@@ -104,5 +110,4 @@ public class StationaryItemService {
         }
 
     }
-
 }

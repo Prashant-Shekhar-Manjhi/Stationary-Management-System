@@ -6,13 +6,12 @@ import com.targetindia.stationarymanagementsystem.exception.DaoException;
 import com.targetindia.stationarymanagementsystem.exception.ItemNotFoundException;
 import com.targetindia.stationarymanagementsystem.model.Message;
 import com.targetindia.stationarymanagementsystem.services.StationaryItemService;
+import com.targetindia.stationarymanagementsystem.web.validators.ItemValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static com.targetindia.stationarymanagementsystem.web.validators.ItemValidator.isItemValid;
 
 @RestController
 @CrossOrigin
@@ -22,9 +21,12 @@ public class StationaryItemController {
     @Autowired
     private StationaryItemService service;
 
+    @Autowired
+    private ItemValidator validator;
+
     @PostMapping(path = "/add_item", consumes = "application/json",produces = "application/json")
     public ResponseEntity handleAddItem(@RequestBody StationaryItemDTO itemDTO){
-        if(!isItemValid(itemDTO)){
+        if(!validator.isItemValid(itemDTO)){
             return ResponseEntity.status(400).body(new Message("Invalid Input"));
         }
         try{

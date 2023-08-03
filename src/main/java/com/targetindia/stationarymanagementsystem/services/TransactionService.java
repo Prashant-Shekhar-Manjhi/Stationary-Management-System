@@ -8,6 +8,8 @@ import com.targetindia.stationarymanagementsystem.exception.ItemNotFoundExceptio
 import com.targetindia.stationarymanagementsystem.repository.StationaryItemRepository;
 import com.targetindia.stationarymanagementsystem.repository.StudentRepository;
 import com.targetindia.stationarymanagementsystem.repository.TransactionRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TransactionService{
+@NoArgsConstructor
+@AllArgsConstructor
+public class TransactionService {
+
 
     @Autowired
     private TransactionRepository repository;
@@ -25,11 +30,15 @@ public class TransactionService{
     @Autowired
     private StationaryItemRepository stationaryItemRepository;
 
+    public TransactionService(TransactionRepository repository){
+        this.repository = repository;
+    }
+
     //create transaction....
     public Transaction createOneTransaction(Transaction transaction) throws DaoException {
-        try{
+        try {
             return repository.save(transaction);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new DaoException(e.getMessage());
         }
     }
@@ -38,12 +47,11 @@ public class TransactionService{
     public Transaction findOneTransaction(Integer transactionId) throws ItemNotFoundException, DaoException {
         try {
             Optional<Transaction> result = repository.findById(transactionId);
-            if(result.isPresent()) return result.get();
-            else throw new ItemNotFoundException("Transaction not found with id "+transactionId);
-        }catch (ItemNotFoundException e){
+            if (result.isPresent()) return result.get();
+            else throw new ItemNotFoundException("Transaction not found with id " + transactionId);
+        } catch (ItemNotFoundException e) {
             throw e;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new DaoException(e.getMessage());
         }
     }
@@ -51,16 +59,14 @@ public class TransactionService{
     public List<Transaction> findAllTransactionByStudentId(Integer studentId) throws DaoException, ItemNotFoundException {
         try {
             Optional<Student> result = studentRepository.findById(studentId);
-            if(result.isPresent()){
+            if (result.isPresent()) {
                 Student student = result.get();
-                List<Transaction>list = repository.findAllByStudent(student);
+                List<Transaction> list = repository.findAllByStudent(student);
                 return list;
-            }
-            else throw new ItemNotFoundException("Student not found with id "+studentId);
-        }catch (ItemNotFoundException e){
+            } else throw new ItemNotFoundException("Student not found with id " + studentId);
+        } catch (ItemNotFoundException e) {
             throw e;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new DaoException(e.getMessage());
         }
     }
@@ -68,55 +74,52 @@ public class TransactionService{
     public List<Transaction> findAllTransactionByItemId(Integer itemId) throws DaoException, ItemNotFoundException {
         try {
             Optional<StationaryItem> result = stationaryItemRepository.findById(itemId);
-            if(result.isPresent()){
+            if (result.isPresent()) {
                 StationaryItem stationaryItem = result.get();
-                List<Transaction>list = repository.findAllByStationaryItem(stationaryItem);
+                List<Transaction> list = repository.findAllByStationaryItem(stationaryItem);
                 return list;
-            }
-            else throw new ItemNotFoundException("Student not found with id "+itemId);
-        }catch (ItemNotFoundException e){
+            } else throw new ItemNotFoundException("Item not found with id " + itemId);
+        } catch (ItemNotFoundException e) {
             throw e;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new DaoException(e.getMessage());
         }
     }
+
     public List<Transaction> findAllTransactions() throws DaoException {
         try {
             List<Transaction> result = repository.findAll();
             return result;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new DaoException(e.getMessage());
         }
     }
     //update transaction...
 
     public Transaction updateTransaction(Transaction transaction) throws DaoException, ItemNotFoundException {
-        try{
+        try {
             Optional<Transaction> result = repository.findById(transaction.getTransactionId());
-            if(result.isPresent()){
+            if (result.isPresent()) {
                 Transaction res = result.get();
-                if(transaction.getReturnDate() != null) res.setReturnDate(transaction.getReturnDate());
-                if(transaction.getReturned() != null){
+                if (transaction.getReturnDate() != null) res.setReturnDate(transaction.getReturnDate());
+                if (transaction.getReturned() != null) {
                     StationaryItem item = stationaryItemRepository.findById(res.getStationaryItem().getItemId()).get();
-                    if(transaction.getReturned() == true){
+                    if (transaction.getReturned() == true) {
                         res.setReturned(true);
-                        item.setQuantity(res.getStationaryItem().getQuantity()+res.getWithdrawnQuantity());
-                    }
-                    else{
+                        item.setQuantity(res.getStationaryItem().getQuantity() + res.getWithdrawnQuantity());
+                    } else {
                         res.setReturned(false);
-                        item.setQuantity(res.getStationaryItem().getQuantity()-res.getWithdrawnQuantity());
+                        item.setQuantity(res.getStationaryItem().getQuantity() - res.getWithdrawnQuantity());
                     }
                     stationaryItemRepository.save(item);
-                }else res.setReturned(res.getReturned());
+                } else res.setReturned(res.getReturned());
                 repository.save(res);
                 return res;
-            }
-            else throw new ItemNotFoundException("Transaction not available with id "+transaction.getTransactionId());
-        }catch (ItemNotFoundException e){
+            } else
+                throw new ItemNotFoundException("Transaction not available with id " + transaction.getTransactionId());
+        } catch (ItemNotFoundException e) {
             throw e;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new DaoException(e.getMessage());
         }
     }

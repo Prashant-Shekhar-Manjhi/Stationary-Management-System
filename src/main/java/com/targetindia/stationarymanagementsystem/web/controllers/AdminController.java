@@ -6,12 +6,11 @@ import com.targetindia.stationarymanagementsystem.entities.Admin;
 import com.targetindia.stationarymanagementsystem.model.AdminLoginResponse;
 import com.targetindia.stationarymanagementsystem.model.Message;
 import com.targetindia.stationarymanagementsystem.services.AdminService;
+import com.targetindia.stationarymanagementsystem.web.validators.AdminValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.targetindia.stationarymanagementsystem.web.validators.AdminValidator.isAdminCredentialValid;
-import static com.targetindia.stationarymanagementsystem.web.validators.AdminValidator.isAdminValid;
 
 @RestController
 @CrossOrigin
@@ -19,11 +18,13 @@ import static com.targetindia.stationarymanagementsystem.web.validators.AdminVal
 public class AdminController {
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private AdminValidator validator;
 
     //Registration...
     @PostMapping(consumes = "application/json")
     public ResponseEntity handleRegister(@RequestBody AdminDTO adminDTO) {
-        if (!isAdminValid(adminDTO)) {
+        if (!validator.isAdminValid(adminDTO)) {
             return ResponseEntity.status(400).body(new Message("Invalid Input"));
         }
 
@@ -44,7 +45,7 @@ public class AdminController {
     public ResponseEntity handleAdminLogin(@RequestBody AdminLoginDTO loginDto){
 
         //validation...
-        if(!isAdminCredentialValid(loginDto)){
+        if(!validator.isAdminCredentialValid(loginDto)){
             return ResponseEntity.status(400).body(new Message("Invalid input"));
         }
 
