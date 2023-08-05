@@ -3,6 +3,7 @@ package com.targetindia.stationarymanagementsystem.web.controllers;
 import com.targetindia.stationarymanagementsystem.dto.AdminDTO;
 import com.targetindia.stationarymanagementsystem.dto.AdminLoginDTO;
 import com.targetindia.stationarymanagementsystem.entities.Admin;
+import com.targetindia.stationarymanagementsystem.exception.DaoException;
 import com.targetindia.stationarymanagementsystem.model.AdminLoginResponse;
 import com.targetindia.stationarymanagementsystem.model.Message;
 import com.targetindia.stationarymanagementsystem.services.AdminService;
@@ -23,7 +24,7 @@ public class AdminController {
 
     //Registration...
     @PostMapping(consumes = "application/json")
-    public ResponseEntity handleRegister(@RequestBody AdminDTO adminDTO) {
+    public ResponseEntity register(@RequestBody AdminDTO adminDTO) {
         if (!validator.isAdminValid(adminDTO)) {
             return ResponseEntity.status(400).body(new Message("Invalid Input"));
         }
@@ -42,7 +43,7 @@ public class AdminController {
     }
 
     @PostMapping(path = "/login", produces = "application/json", consumes = "application/json")
-    public ResponseEntity handleAdminLogin(@RequestBody AdminLoginDTO loginDto){
+    public ResponseEntity adminLogin(@RequestBody AdminLoginDTO loginDto){
 
         //validation...
         if(!validator.isAdminCredentialValid(loginDto)){
@@ -52,7 +53,10 @@ public class AdminController {
         try{
             Admin admin = adminService.adminLogin(loginDto);
             return ResponseEntity.ok(new AdminLoginResponse("Login Successful", true ,admin));
-        }catch (Exception e){
+        }catch (DaoException e){
+            return ResponseEntity.status(500).body(new AdminLoginResponse(e.getMessage(), false));
+        }
+        catch (Exception e){
             return ResponseEntity.status(401).body(new AdminLoginResponse(e.getMessage(), false));
         }
     }

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
 public class Message {
     private String message;
     private Date date = new Date();

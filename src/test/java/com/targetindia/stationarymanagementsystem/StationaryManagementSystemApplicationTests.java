@@ -1,13 +1,15 @@
 package com.targetindia.stationarymanagementsystem;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectPackages;
+import org.junit.runner.RunWith;
+
+@RunWith(JUnitPlatform.class)
+@SelectPackages({"com.targetindia.stationarymanagementsystem.web","com.targetindia.stationarymanagementsystem.services"})
 class StationaryManagementSystemApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+
 
 }
