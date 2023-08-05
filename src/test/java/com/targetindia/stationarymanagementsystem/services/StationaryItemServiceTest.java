@@ -39,7 +39,7 @@ class StationaryItemServiceTest {
         stationaryItem.setItemId(1);
         stationaryItem.setItemName("Pen");
         stationaryItem.setQuantity(40);
-        stationaryItem.setReturnable(true);
+        stationaryItem.setReturnable(false);
         stationaryItem.setMaxDays(5);
     }
 
@@ -138,7 +138,7 @@ class StationaryItemServiceTest {
     }
 
     @Test
-    void testUpdateItem() throws DaoException, ItemNotFoundException {
+    void testUpdateValidItem() throws DaoException, ItemNotFoundException {
         mock(StationaryItem.class);
         mock(StationaryItemRepository.class);
 
@@ -160,6 +160,7 @@ class StationaryItemServiceTest {
 
     @Test
     void testUpdateItemDaoException(){
+        stationaryItem.setReturnable(null);
         mock(StationaryItem.class);
         mock(StationaryItemRepository.class);
 
