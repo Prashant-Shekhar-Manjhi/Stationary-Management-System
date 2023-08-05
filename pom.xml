@@ -65,7 +65,12 @@
 			<version>3.24.2</version> <!-- Replace with the latest version available -->
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+		<groupId>org.junit.platform</groupId>
+		<artifactId>junit-platform-runner</artifactId>
+		<version>1.8.1</version>
+		<scope>test</scope>
+	</dependency>
 	</dependencies>
 
 	<build>

@@ -25,7 +25,7 @@ public class StationaryItemController {
     private ItemValidator validator;
 
     @PostMapping(path = "/add_item", consumes = "application/json",produces = "application/json")
-    public ResponseEntity handleAddItem(@RequestBody StationaryItemDTO itemDTO){
+    public ResponseEntity addItem(@RequestBody StationaryItemDTO itemDTO){
         if(!validator.isItemValid(itemDTO)){
             return ResponseEntity.status(400).body(new Message("Invalid Input"));
         }
@@ -45,7 +45,7 @@ public class StationaryItemController {
 
 
     @GetMapping(path = "/{id}", produces = "application/json")
-    public ResponseEntity handleGetOneItem(@PathVariable Integer id){
+    public ResponseEntity getOneItem(@PathVariable Integer id){
         try {
             StationaryItem item = service.getOneItem(id);
             if(item == null) throw new ItemNotFoundException("Item not found with id "+id);
@@ -59,7 +59,7 @@ public class StationaryItemController {
     }
 
     @GetMapping(produces = "application/json")
-    public ResponseEntity handleGetAllItems(){
+    public ResponseEntity getAllItems(){
         try{
             List<StationaryItem> fetchedItems = service.getAllItem();
             return ResponseEntity.ok(fetchedItems);
@@ -72,7 +72,7 @@ public class StationaryItemController {
     }
 
     @PatchMapping(path = "/{id}", produces = "application/json", consumes = "application/json")
-    public ResponseEntity handleUpdateItem(@PathVariable Integer id, @RequestBody StationaryItem stationaryItem){
+    public ResponseEntity updateItem(@PathVariable Integer id, @RequestBody StationaryItem stationaryItem){
         try{
             stationaryItem.setItemId(id);
             StationaryItem item = service.updateItem(stationaryItem);
@@ -85,7 +85,7 @@ public class StationaryItemController {
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json")
-    public ResponseEntity handleDeleteOneItem(@PathVariable Integer id){
+    public ResponseEntity deleteOneItem(@PathVariable Integer id){
         try {
             StationaryItem fetchedItem = service.deleteOneItem(id);
             return ResponseEntity.ok(fetchedItem);

@@ -38,7 +38,7 @@ public class TransactionController{
 
     //Handle Get Mapping...
     @GetMapping(produces = "application/json")
-    public ResponseEntity handleFindAllTransaction(){
+    public ResponseEntity findAllTransaction(){
         try {
             List<Transaction> result = service.findAllTransactions();
             if(result.isEmpty()){
@@ -57,7 +57,7 @@ public class TransactionController{
     }
 
     @GetMapping(path = "/{id}",produces = "application/json")
-    public ResponseEntity handleFindOneTransaction(@PathVariable Integer id){
+    public ResponseEntity findOneTransaction(@PathVariable Integer id){
         try {
             Transaction result = service.findOneTransaction(id);
             TransactionResponseDTO res = getTransactionResponseDTO(result);
@@ -83,7 +83,7 @@ public class TransactionController{
     }
 
     @GetMapping(path = "/all/by_student_id", produces = "application/json")
-    public ResponseEntity handleFindAllTransactionByStudentId(@RequestParam("id") Integer studentId){
+    public ResponseEntity findAllTransactionByStudentId(@RequestParam("id") Integer studentId){
         try {
             List <Transaction> transactionList = service.findAllTransactionByStudentId(studentId);
             if(transactionList.isEmpty()){
@@ -103,7 +103,7 @@ public class TransactionController{
     }
 
     @GetMapping(path = "/all/by_item_id", produces = "application/json")
-    public ResponseEntity handleFindAllTransactionByItemId(@RequestParam("id") Integer itemId){
+    public ResponseEntity findAllTransactionByItemId(@RequestParam("id") Integer itemId){
         try {
             List <Transaction> transactionList = service.findAllTransactionByItemId(itemId);
             if(transactionList.isEmpty()){
@@ -123,7 +123,7 @@ public class TransactionController{
 
     //Handle Post Mapping...
     @PostMapping(path = "/{studentId}",produces = "application/json", consumes = "application/json")
-    public ResponseEntity handleCreateTransaction(@PathVariable Integer studentId, @RequestBody TransactionRequestDTO transactionDT){
+    public ResponseEntity createTransaction(@PathVariable Integer studentId, @RequestBody TransactionRequestDTO transactionDT){
         //Validation...
         if(!validator.isTransactionValid(transactionDT)){
             return ResponseEntity.status(400).body(new Message("Bad Request"));
@@ -165,7 +165,7 @@ public class TransactionController{
     }
     //Handle Patch Mapping...
     @PatchMapping(path = "/{transactionId}",produces = "application/json", consumes = "application/json")
-    public ResponseEntity handleUpdateTransaction(@PathVariable Integer transactionId, @RequestBody TransactionRequestDTO transactionDTO){
+    public ResponseEntity updateTransaction(@PathVariable Integer transactionId, @RequestBody TransactionRequestDTO transactionDTO){
         try {
             Transaction newTransaction = new Transaction();
             newTransaction.setTransactionId(transactionId);

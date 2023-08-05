@@ -27,7 +27,7 @@ public class StudentController {
 
     //login...
     @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
-    public ResponseEntity handleStudentLogin(@RequestBody StudentLoginDTO loginDTO){
+    public ResponseEntity studentLogin(@RequestBody StudentLoginDTO loginDTO){
         if(!validator.isStudentCredentialValid(loginDTO)){
             return ResponseEntity.status(400).body(new Message("Invalid Inputs"));
         }
@@ -40,7 +40,7 @@ public class StudentController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity handleRegistration(@RequestBody StudentDTO studentDTO){
+    public ResponseEntity registration(@RequestBody StudentDTO studentDTO){
         if(!validator.isStudentValid(studentDTO)){
             return ResponseEntity.status(400).body(new Message("Invalid Inputs."));
         }
@@ -53,7 +53,7 @@ public class StudentController {
     }
 
     @GetMapping(produces = "application/json")
-    public ResponseEntity handleGetAllStudents(){
+    public ResponseEntity getAllStudents(){
         try{
             List<Student> studentList = service.getAllStudent();
             return ResponseEntity.ok(studentList);

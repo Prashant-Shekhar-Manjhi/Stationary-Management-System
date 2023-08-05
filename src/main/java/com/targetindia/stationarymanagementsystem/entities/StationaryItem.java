@@ -36,4 +36,5 @@ public class StationaryItem {
     @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "item_id")
     private List<Transaction> transactions;
+
 }

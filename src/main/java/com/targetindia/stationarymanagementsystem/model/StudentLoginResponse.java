@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class StudentLoginResponse {
     private String message;
     private Boolean status;
