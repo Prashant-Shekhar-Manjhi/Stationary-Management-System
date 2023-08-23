@@ -4,6 +4,7 @@ import com.targetindia.stationarymanagementsystem.dto.StudentDTO;
 import com.targetindia.stationarymanagementsystem.dto.StudentLoginDTO;
 import com.targetindia.stationarymanagementsystem.entities.Student;
 import com.targetindia.stationarymanagementsystem.exception.DaoException;
+import com.targetindia.stationarymanagementsystem.exception.ItemNotFoundException;
 import com.targetindia.stationarymanagementsystem.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,11 +51,11 @@ public class StudentService {
         }
     }
 
-    public List<Student> getAllStudent(){
+    public List<Student> getAllStudent() throws DaoException {
         try {
             return repository.findAll();
         }catch (Exception e){
-            throw e;
+            throw new DaoException(e.getMessage());
         }
     }
 
@@ -62,7 +63,7 @@ public class StudentService {
         try {
             Optional<Student> result = repository.findById(studentId);
             if(result.isPresent()) return result.get();
-            return null;
+            throw new ItemNotFoundException("value is null");
         }catch (Exception e){
             throw new DaoException(e.getMessage());
         }

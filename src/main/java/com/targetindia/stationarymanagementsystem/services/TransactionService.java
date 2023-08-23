@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@NoArgsConstructor
 @AllArgsConstructor
 public class TransactionService {
 
@@ -30,9 +29,6 @@ public class TransactionService {
     @Autowired
     private StationaryItemRepository stationaryItemRepository;
 
-    public TransactionService(TransactionRepository repository){
-        this.repository = repository;
-    }
 
     //create transaction....
     public Transaction createOneTransaction(Transaction transaction) throws DaoException {
@@ -113,7 +109,7 @@ public class TransactionService {
                     }
                     stationaryItemRepository.save(item);
                 } else res.setReturned(res.getReturned());
-                repository.save(res);
+                res = repository.save(res);
                 return res;
             } else
                 throw new ItemNotFoundException("Transaction not available with id " + transaction.getTransactionId());

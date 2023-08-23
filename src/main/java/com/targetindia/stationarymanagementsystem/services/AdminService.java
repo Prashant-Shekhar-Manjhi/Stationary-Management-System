@@ -28,17 +28,20 @@ public class AdminService {
     }
 
     //Admin Login...
-    public Admin adminLogin(AdminLoginDTO loginDto) throws DaoException {
+    public Admin adminLogin(AdminLoginDTO loginDto) throws DaoException, ItemNotFoundException {
         try{
             Admin fetchedAdminByEmail = adminRepository.findByAdminEmail(loginDto.getAdminEmail());
             if(fetchedAdminByEmail != null){
                 String password = loginDto.getAdminPassword();
                 String encodedPassword = fetchedAdminByEmail.getAdminPassword();
                 if(passwordEncoder.matches(password, encodedPassword)) return fetchedAdminByEmail;
-                else throw new ItemNotFoundException("Incorrect Password");
+                throw new ItemNotFoundException("Incorrect Password");
             }
-            else throw new ItemNotFoundException("Incorrect Email");
-        }catch (Exception e){
+            throw new ItemNotFoundException("Incorrect Email");
+        }catch (ItemNotFoundException e){
+            throw new ItemNotFoundException(e.getMessage());
+        }
+        catch (Exception e){
             throw new DaoException(e.getMessage());
         }
 
